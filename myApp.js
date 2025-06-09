@@ -50,7 +50,7 @@ Person.find({ name: personName }, (err, data) => {
     done(null, data);
 });
 };
-/** **for new commit !!**
+
 const findOneByFood = (food, done) => {
   done(null /*, data*/);
 };
