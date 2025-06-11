@@ -67,16 +67,19 @@ Person.findOne({ _id: personId }, (err, data) => {
 
 const findEditThenSave = (personId, done) => {
   const foodToAdd = "hamburger";
-  Person.findById(personId,(err,data)=>{
-  if (err) return done(err);
-  person.favoriteFoods.push(foodToAdd);  
-  person.save(err,updatedPerson=>{
-  if (err) return done(err);
-  done(null,updatedPerson);
-  });
-  });
+  Person.findById(personId, (err, person) => {
+    if (err) return done(err);
+    if (!person) return done(new Error("Person not found"));
 
+    person.favoriteFoods.push(foodToAdd);
+
+    person.save((err, updatedPerson) => {
+      if (err) return done(err);
+      return done(null, updatedPerson);
+    });
+  });
 };
+
 
 const findAndUpdate = (personName, done) => {
   const ageToSet = 20;
